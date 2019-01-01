@@ -2,13 +2,15 @@
 
 ## Setup
 
-Clone this repository into the same directory as your `Cross Check` project (not inside your `Cross Check` project directory). The directory structure should look like this:
+First, make sure that you have a directory called `cross_check` that contains all the code for you project. For example, inside the `cross_check` directory should be `lib`, `test`, and `data` directories. The spelling must be exactly `cross_check`.
+
+Clone this repository into the same directory as `cross_check`. Make sure it is not *inside* the `cross_check` directory, but rather adjacent to it. The directory structure should look like this:
 
   ```
     <some_directory>
     |
     |\
-    | \<your cross check project>
+    | \<cross_check>
     |
     |\
     | \<cross_check_spec_harness>
@@ -20,7 +22,7 @@ Change into the `cross_check_spec_harness` directory and run `bundle` from the c
 
 From the `cross_check_spec_harness` directory, in the command line run `bundle exec rspec`. This will run a test suite for the `StatTracker` class as described in the project page.
 
-In order for this to work, all requirement statements inside your project's `lib` directory need to be `require_relative` rather than `require`. For example, if in your `stat_tracker.rb` file you have a line:
+In order for the test suite to run, all requirement statements inside your project's `lib` directory need to be `require_relative` rather than `require`. For example, if in your `stat_tracker.rb` file you have a line:
 
 ```ruby
 require './lib/helper_class'
