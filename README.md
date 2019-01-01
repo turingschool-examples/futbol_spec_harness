@@ -4,7 +4,9 @@
 
 First, make sure that you have a directory called `cross_check` that contains all the code for you project. For example, inside the `cross_check` directory should be `lib`, `test`, and `data` directories. The spelling must be exactly `cross_check`.
 
-Clone this repository into the same directory as `cross_check`. Make sure it is not *inside* the `cross_check` directory, but rather adjacent to it. The directory structure should look like this:
+Navigate to the directory where `cross_check` is located and clone this repository. Make sure you not *inside* the `cross_check` directory, but rather adjacent to it, i.e. if you enter `ls` you should see `cross_check` listed.
+
+After you clone, the directory structure should look like this:
 
   ```
     <some_directory>
