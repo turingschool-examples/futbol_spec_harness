@@ -48,11 +48,11 @@ RSpec.describe StatTracker do
   end
 
   it "#season_with_most_games" do
-    expect(@stat_tracker.season_with_most_games).to eq "20172018"
+    expect(@stat_tracker.season_with_most_games).to eq 20172018
   end
 
   it "#season_with_fewest_games" do
-    expect(@stat_tracker.season_with_fewest_games).to eq "20122013"
+    expect(@stat_tracker.season_with_fewest_games).to eq 20122013
   end
 
   it "#count_of_games_by_season" do
