@@ -31,28 +31,12 @@ RSpec.describe StatTracker do
     expect(@stat_tracker.biggest_blowout).to eq 10
   end
 
-  it "#most_popular_venue" do
-    expect(@stat_tracker.most_popular_venue).to eq "United Center"
-  end
-
-  it "#least_popular_venue" do
-    expect(@stat_tracker.least_popular_venue).to eq "Dodger Stadium"
-  end
-
   it "#percentage_home_wins" do
     expect(@stat_tracker.percentage_home_wins).to eq 0.55
   end
 
   it "#percentage_visitor_wins" do
     expect(@stat_tracker.percentage_visitor_wins).to eq 0.45
-  end
-
-  it "#season_with_most_games" do
-    expect(@stat_tracker.season_with_most_games).to eq 20172018
-  end
-
-  it "#season_with_fewest_games" do
-    expect(@stat_tracker.season_with_fewest_games).to eq 20122013
   end
 
   it "#count_of_games_by_season" do
@@ -129,33 +113,6 @@ RSpec.describe StatTracker do
 
   it "#worst_fans" do
     expect(@stat_tracker.worst_fans).to eq []
-  end
-
-  it "#biggest_bust" do
-    expect(@stat_tracker.biggest_bust("20132014")).to eq "Kings"
-    expect(@stat_tracker.biggest_bust("20142015")).to eq "Blackhawks"
-  end
-
-  it "#biggest_surprise" do
-    expect(@stat_tracker.biggest_surprise("20132014")).to eq "Lightning"
-    expect(@stat_tracker.biggest_surprise("20142015")).to eq "Jets"
-  end
-
-  it "#season_summary" do
-    expected = {
-      preseason: {
-        win_percentage: 0.65,
-        goals_scored: 57,
-        goals_against: 47
-      },
-      regular_season: {
-        win_percentage: 0.62,
-        goals_scored: 272,
-        goals_against: 228
-      }
-    }
-
-    expect(@stat_tracker.season_summary("20172018", "54")).to eq expected
   end
 
   it "#team_info" do
@@ -348,4 +305,49 @@ RSpec.describe StatTracker do
       }
       expect(@stat_tracker.seasonal_summary("18")).to eq expected
     end
-  end
+
+    it "#biggest_bust" do
+      expect(@stat_tracker.biggest_bust("20132014")).to eq "Kings"
+      expect(@stat_tracker.biggest_bust("20142015")).to eq "Blackhawks"
+    end
+
+    it "#biggest_surprise" do
+      expect(@stat_tracker.biggest_surprise("20132014")).to eq "Lightning"
+      expect(@stat_tracker.biggest_surprise("20142015")).to eq "Jets"
+    end
+
+    it "#winningest_coach" do
+      expect(@stat_tracker.winningest_coach("20132014")).to eq "Claude Julien"
+      expect(@stat_tracker.winningest_coach("20142015")).to eq "Alain Vigneault"
+    end
+
+    it "#worst_coach" do
+      expect(@stat_tracker.worst_coach("20132014")).to eq "Peter Laviolette"
+      expect(@stat_tracker.worst_coach("20142015")).to eq "Craig MacTavish"
+    end
+
+    it "#most_accurate_team" do
+      expect(@stat_tracker.most_accurate_team("20132014")).to eq "Ducks"
+      expect(@stat_tracker.most_accurate_team("20142015")).to eq "Flames"
+    end
+
+    it "#least_accurate_team" do
+      expect(@stat_tracker.least_accurate_team("20132014")).to eq "Sabres"
+      expect(@stat_tracker.least_accurate_team("20142015")).to eq "Coyotes"
+    end
+
+    it "#most_hits" do
+      expect(@stat_tracker.most_hits("20132014")).to eq "Kings"
+      expect(@stat_tracker.most_hits("20142015")).to eq "Islanders"
+    end
+
+    it "#least_hits" do
+      expect(@stat_tracker.least_hits("20132014")).to eq "Devils"
+      expect(@stat_tracker.least_hits("20142015")).to eq "Wild"
+    end
+
+    it "#power_play_goal_percentage" do
+      expect(@stat_tracker.power_play_goal_percentage("20132014")).to eq 0.22
+      expect(@stat_tracker.power_play_goal_percentage("20142015")).to eq 0.21
+    end
+end
