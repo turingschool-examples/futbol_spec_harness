@@ -307,13 +307,13 @@ RSpec.describe StatTracker do
     end
 
     it "#biggest_bust" do
-      expect(@stat_tracker.biggest_bust("20132014")).to eq "Kings"
-      expect(@stat_tracker.biggest_bust("20142015")).to eq "Blackhawks"
+      expect(@stat_tracker.biggest_bust("20132014")).to eq "Lightning"
+      expect(@stat_tracker.biggest_bust("20142015")).to eq "Jets"
     end
 
     it "#biggest_surprise" do
-      expect(@stat_tracker.biggest_surprise("20132014")).to eq "Lightning"
-      expect(@stat_tracker.biggest_surprise("20142015")).to eq "Jets"
+      expect(@stat_tracker.biggest_surprise("20132014")).to eq "Kings"
+      expect(@stat_tracker.biggest_surprise("20142015")).to eq "Blackhawks"
     end
 
     it "#winningest_coach" do
