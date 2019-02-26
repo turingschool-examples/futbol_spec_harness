@@ -204,7 +204,7 @@ RSpec.describe StatTracker do
   it "#seasonal_summary" do
     expected = {
       "20162017" => {
-        preseason: {
+        postseason: {
           :win_percentage=>0.64,
           :total_goals_scored=>60,
           :total_goals_against=>48,
@@ -219,7 +219,7 @@ RSpec.describe StatTracker do
           }
         },
         "20172018" => {
-          preseason: {
+          postseason: {
             :win_percentage=>0.54,
             :total_goals_scored=>41,
             :total_goals_against=>42,
@@ -235,7 +235,7 @@ RSpec.describe StatTracker do
           }
         },
         "20132014" => {
-          preseason: {
+          postseason: {
             :win_percentage=>0.0,
             :total_goals_scored=>0,
             :total_goals_against=>0,
@@ -252,7 +252,7 @@ RSpec.describe StatTracker do
           }
         },
         "20122013" => {
-          preseason: {
+          postseason: {
             :win_percentage=>0.0,
             :total_goals_scored=>0,
             :total_goals_against=>0,
@@ -269,7 +269,7 @@ RSpec.describe StatTracker do
           }
         },
         "20142015" => {
-          preseason: {
+          postseason: {
             :win_percentage=>0.33,
             :total_goals_scored=>21,
             :total_goals_against=>19,
@@ -286,7 +286,7 @@ RSpec.describe StatTracker do
           }
         },
         "20152016" => {
-          preseason: {
+          postseason: {
             :win_percentage=>0.5,
             :total_goals_scored=>31,
             :total_goals_against=>43,
@@ -307,13 +307,13 @@ RSpec.describe StatTracker do
     end
 
     it "#biggest_bust" do
-      expect(@stat_tracker.biggest_bust("20132014")).to eq "Kings"
-      expect(@stat_tracker.biggest_bust("20142015")).to eq "Blackhawks"
+      expect(@stat_tracker.biggest_bust("20132014")).to eq "Lightning"
+      expect(@stat_tracker.biggest_bust("20142015")).to eq "Jets"
     end
 
     it "#biggest_surprise" do
-      expect(@stat_tracker.biggest_surprise("20132014")).to eq "Lightning"
-      expect(@stat_tracker.biggest_surprise("20142015")).to eq "Jets"
+      expect(@stat_tracker.biggest_surprise("20132014")).to eq "Kings"
+      expect(@stat_tracker.biggest_surprise("20142015")).to eq "Blackhawks"
     end
 
     it "#winningest_coach" do
@@ -341,9 +341,9 @@ RSpec.describe StatTracker do
       expect(@stat_tracker.most_hits("20142015")).to eq "Islanders"
     end
 
-    it "#least_hits" do
-      expect(@stat_tracker.least_hits("20132014")).to eq "Devils"
-      expect(@stat_tracker.least_hits("20142015")).to eq "Wild"
+    it "#fewest_hits" do
+      expect(@stat_tracker.fewest_hits("20132014")).to eq "Devils"
+      expect(@stat_tracker.fewest_hits("20142015")).to eq "Wild"
     end
 
     it "#power_play_goal_percentage" do
