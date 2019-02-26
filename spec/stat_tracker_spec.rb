@@ -341,9 +341,9 @@ RSpec.describe StatTracker do
       expect(@stat_tracker.most_hits("20142015")).to eq "Islanders"
     end
 
-    it "#least_hits" do
-      expect(@stat_tracker.least_hits("20132014")).to eq "Devils"
-      expect(@stat_tracker.least_hits("20142015")).to eq "Wild"
+    it "#fewest_hits" do
+      expect(@stat_tracker.fewest_hits("20132014")).to eq "Devils"
+      expect(@stat_tracker.fewest_hits("20142015")).to eq "Wild"
     end
 
     it "#power_play_goal_percentage" do
