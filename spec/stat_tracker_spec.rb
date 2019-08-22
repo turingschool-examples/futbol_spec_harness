@@ -1,10 +1,10 @@
-require '../cross_check/lib/stat_tracker'
+require '../futbol/lib/stat_tracker'
 
 RSpec.describe StatTracker do
   before(:all) do
-    game_path = './data/game.csv'
-    team_path = './data/team_info.csv'
-    game_teams_path = './data/game_teams_stats.csv'
+    game_path = './data/games.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams.csv'
 
     locations = {
       games: game_path,
@@ -20,23 +20,27 @@ RSpec.describe StatTracker do
   end
 
   it "#highest_total_score" do
-    expect(@stat_tracker.highest_total_score).to eq 15
+    expect(@stat_tracker.highest_total_score).to eq 11
   end
 
   it "#lowest_total_score" do
-    expect(@stat_tracker.lowest_total_score).to eq 1
+    expect(@stat_tracker.lowest_total_score).to eq 0
   end
 
   it "#biggest_blowout" do
-    expect(@stat_tracker.biggest_blowout).to eq 10
+    expect(@stat_tracker.biggest_blowout).to eq 8
   end
 
   it "#percentage_home_wins" do
-    expect(@stat_tracker.percentage_home_wins).to eq 0.55
+    expect(@stat_tracker.percentage_home_wins).to eq 0.44
   end
 
   it "#percentage_visitor_wins" do
-    expect(@stat_tracker.percentage_visitor_wins).to eq 0.45
+    expect(@stat_tracker.percentage_visitor_wins).to eq 0.36
+  end
+
+  it "#percentage_ties" do
+    expect(@stat_tracker.percentage_ties).to eq 0.20
   end
 
   it "#count_of_games_by_season" do
@@ -52,17 +56,17 @@ RSpec.describe StatTracker do
   end
 
   it "#average_goals_per_game" do
-    expect(@stat_tracker.average_goals_per_game).to eq 5.54
+    expect(@stat_tracker.average_goals_per_game).to eq 4.22
   end
 
   it "#average_goals_by_season" do
     expected = {
-      "20122013"=>5.4,
-      "20162017"=>5.51,
-      "20142015"=>5.43,
-      "20152016"=>5.41,
-      "20132014"=>5.5,
-      "20172018"=>5.94
+      "20122013"=>4.12,
+      "20162017"=>4.23,
+      "20142015"=>4.14,
+      "20152016"=>4.16,
+      "20132014"=>4.19,
+      "20172018"=>4.44
     }
     expect(@stat_tracker.average_goals_by_season).to eq expected
   end
@@ -72,282 +76,255 @@ RSpec.describe StatTracker do
   end
 
   it "#best_offense" do
-    expect(@stat_tracker.best_offense).to eq "Golden Knights"
+    expect(@stat_tracker.best_offense).to eq "Reign FC"
   end
 
   it "#worst_offense" do
-    expect(@stat_tracker.worst_offense).to eq "Sabres"
+    expect(@stat_tracker.worst_offense).to eq "Utah Royals FC"
   end
 
   it "#best_defense" do
-    expect(@stat_tracker.best_defense).to eq "Kings"
+    expect(@stat_tracker.best_defense).to eq "FC Cincinnati"
   end
 
   it "#worst_defense" do
-    expect(@stat_tracker.worst_defense).to eq "Coyotes"
+    expect(@stat_tracker.worst_defense).to eq "Columbus Crew SC"
   end
 
   it "#highest_scoring_visitor" do
-    expect(@stat_tracker.highest_scoring_visitor).to eq "Capitals"
+    expect(@stat_tracker.highest_scoring_visitor).to eq "FC Dallas"
   end
 
   it "#highest_scoring_home_team" do
-    expect(@stat_tracker.highest_scoring_home_team).to eq "Golden Knights"
+    expect(@stat_tracker.highest_scoring_home_team).to eq "Reign FC"
   end
 
   it "#lowest_scoring_visitor" do
-    expect(@stat_tracker.lowest_scoring_visitor).to eq "Sabres"
+    expect(@stat_tracker.lowest_scoring_visitor).to eq "San Jose Earthquakes"
   end
 
   it "#lowest_scoring_home_team" do
-    expect(@stat_tracker.lowest_scoring_home_team).to eq "Sabres"
+    expect(@stat_tracker.lowest_scoring_home_team).to eq "Utah Royals FC"
   end
 
   it "#winningest_team" do
-    expect(@stat_tracker.winningest_team).to eq "Golden Knights"
+    expect(@stat_tracker.winningest_team).to eq "Reign FC"
   end
 
   it "#best_fans" do
-    expect(@stat_tracker.best_fans).to eq "Coyotes"
+    expect(@stat_tracker.best_fans).to eq "San Jose Earthquakes"
   end
 
   it "#worst_fans" do
-    expect(@stat_tracker.worst_fans).to eq []
+    expect(@stat_tracker.worst_fans).to eq ["Houston Dynamo"]
   end
 
-  xit "#team_info" do
+  it "#team_info" do
     expected = {
       "team_id" => "18",
       "franchise_id" => "34",
-      "short_name" => "Nashville",
-      "team_name" => "Predators",
-      "abbreviation" => "NSH",
+      "team_name" => "Minnesota United FC",
+      "abbreviation" => "MIN",
       "link" => "/api/v1/teams/18"
     }
 
     expect(@stat_tracker.team_info("18")).to eq expected
   end
 
-  xit "#best_season" do
+  it "#best_season" do
     expect(@stat_tracker.best_season("6")).to eq "20132014"
   end
 
-  xit "#worst_season" do
+  it "#worst_season" do
     expect(@stat_tracker.worst_season("6")).to eq "20142015"
   end
 
-  xit "#average_win_percentage" do
-    expect(@stat_tracker.average_win_percentage("18")).to eq 0.52
+  it "#average_win_percentage" do
+    expect(@stat_tracker.average_win_percentage("6")).to eq 0.49
   end
 
-  xit "#most_goals_scored" do
-    expect(@stat_tracker.most_goals_scored("18")).to eq 9
+  it "#most_goals_scored" do
+    expect(@stat_tracker.most_goals_scored("18")).to eq 7
   end
 
-  xit "#fewest_goals_scored" do
+  it "#fewest_goals_scored" do
     expect(@stat_tracker.fewest_goals_scored("18")).to eq 0
   end
 
-  xit "#favorite_opponent" do
-    expect(@stat_tracker.favorite_opponent("18")).to eq "Oilers"
+  it "#favorite_opponent" do
+    expect(@stat_tracker.favorite_opponent("18")).to eq "DC United"
   end
 
-  xit "#rival" do
-    expect(@stat_tracker.rival("18")).to eq "Red Wings"
+  it "#rival" do
+    expect(@stat_tracker.rival("18")).to eq "Houston Dash"
   end
 
-  xit "#biggest_team_blowout" do
-    expect(@stat_tracker.biggest_team_blowout("18")).to eq 7
+  it "#biggest_team_blowout" do
+    expect(@stat_tracker.biggest_team_blowout("18")).to eq 5
   end
 
-  xit "#worst_loss" do
-    expect(@stat_tracker.worst_loss("18")).to eq 6
+  it "#worst_loss" do
+    expect(@stat_tracker.worst_loss("18")).to eq 4
   end
 
-  xit "#head_to_head" do
+  it "#head_to_head" do
     expected = {
-      "Blues" => 0.47,
-      "Jets" => 0.55,
-      "Avalanche" => 0.63,
-      "Flames" => 0.44,
-      "Red Wings" => 0.29,
-      "Blue Jackets" => 0.6,
-      "Stars" => 0.52,
-      "Blackhawks" => 0.42,
-      "Wild" => 0.44,
-      "Devils" => 0.5,
-      "Canadiens" => 0.6,
-      "Canucks" => 0.5,
-      "Rangers" => 0.4,
-      "Lightning" => 0.7,
-      "Capitals" => 0.7,
-      "Sharks" => 0.6,
-      "Oilers" => 0.78,
-      "Ducks" => 0.48,
-      "Penguins" => 0.31,
-      "Islanders" => 0.4,
-      "Kings" => 0.61,
-      "Sabres" => 0.7,
-      "Coyotes" => 0.67,
-      "Bruins" => 0.5,
-      "Panthers" => 0.5,
-      "Maple Leafs" => 0.4,
-      "Senators" => 0.7,
-      "Hurricanes" => 0.3,
-      "Golden Knights" => 0.33,
-      "Flyers" => 0.5
+     "Atlanta United"=>0.5,
+     "Chicago Fire"=>0.3,
+     "FC Cincinnati"=>0.39,
+     "DC United"=>0.8,
+     "FC Dallas"=>0.4,
+     "Houston Dynamo"=>0.4,
+     "Sporting Kansas City"=>0.25,
+     "LA Galaxy"=>0.29,
+     "Los Angeles FC"=>0.44,
+     "Montreal Impact"=>0.33,
+     "New England Revolution"=>0.47,
+     "New York City FC"=>0.6,
+     "New York Red Bulls"=>0.4,
+     "Orlando City SC"=>0.37,
+     "Portland Timbers"=>0.3,
+     "Philadelphia Union"=>0.44,
+     "Real Salt Lake"=>0.42,
+     "San Jose Earthquakes"=>0.33,
+     "Seattle Sounders FC"=>0.5,
+     "Toronto FC"=>0.33,
+     "Vancouver Whitecaps FC"=>0.44,
+     "Chicago Red Stars"=>0.48,
+     "Houston Dash"=>0.1,
+     "North Carolina Courage"=>0.2,
+     "Orlando Pride"=>0.47,
+     "Portland Thorns FC"=>0.45,
+     "Reign FC"=>0.33,
+     "Sky Blue FC"=>0.3,
+     "Utah Royals FC"=>0.6,
+     "Washington Spirit FC"=>0.67,
+     "Columbus Crew SC"=>0.5
     }
 
     expect(@stat_tracker.head_to_head("18")).to eq expected
   end
 
-  xit "#seasonal_summary" do
-    expected = {
-      "20162017" => {
-        postseason: {
-          :win_percentage=>0.64,
-          :total_goals_scored=>60,
-          :total_goals_against=>48,
-          :average_goals_scored=>2.73,
-          :average_goals_against=>2.18},
-          :regular_season => {
-            :win_percentage=>0.5,
-            :total_goals_scored=>240,
-            :total_goals_against=>224,
-            :average_goals_scored=>2.93,
-            :average_goals_against=>2.73
-          }
-        },
-        "20172018" => {
-          postseason: {
-            :win_percentage=>0.54,
-            :total_goals_scored=>41,
-            :total_goals_against=>42,
-            :average_goals_scored=>3.15,
-            :average_goals_against=>3.23
-          },
-          :regular_season=>
-          {:win_percentage=>0.65,
-            :total_goals_scored=>267,
-            :total_goals_against=>211,
-            :average_goals_scored=>3.26,
-            :average_goals_against=>2.57
-          }
-        },
-        "20132014" => {
-          postseason: {
-            :win_percentage=>0.0,
-            :total_goals_scored=>0,
-            :total_goals_against=>0,
-            :average_goals_scored=>0.0,
-            :average_goals_against=>0.0
-          },
-          :regular_season=>
-          {
-            :win_percentage=>0.46,
-            :total_goals_scored=>216,
-            :total_goals_against=>242,
-            :average_goals_scored=>2.63,
-            :average_goals_against=>2.95
-          }
-        },
-        "20122013" => {
-          postseason: {
-            :win_percentage=>0.0,
-            :total_goals_scored=>0,
-            :total_goals_against=>0,
-            :average_goals_scored=>0.0,
-            :average_goals_against=>0.0
-          },
-          :regular_season=>
-          {
-            :win_percentage=>0.33,
-            :total_goals_scored=>111,
-            :total_goals_against=>139,
-            :average_goals_scored=>2.31,
-            :average_goals_against=>2.9
-          }
-        },
-        "20142015" => {
-          postseason: {
-            :win_percentage=>0.33,
-            :total_goals_scored=>21,
-            :total_goals_against=>19,
-            :average_goals_scored=>3.5,
-            :average_goals_against=>3.17
-          },
-          :regular_season=>
-          {
-            :win_percentage=>0.57,
-            :total_goals_scored=>232,
-            :total_goals_against=>208,
-            :average_goals_scored=>2.83,
-            :average_goals_against=>2.54
-          }
-        },
-        "20152016" => {
-          postseason: {
-            :win_percentage=>0.5,
-            :total_goals_scored=>31,
-            :total_goals_against=>43,
-            :average_goals_scored=>2.21,
-            :average_goals_against=>3.07
-          },
-          :regular_season=>
-          {
-            :win_percentage=>0.5,
-            :total_goals_scored=>228,
-            :total_goals_against=>215,
-            :average_goals_scored=>2.78,
-            :average_goals_against=>2.62
-          }
-        }
-      }
+  it "#seasonal_summary" do
+    expected = {"20162017"=>
+        {:postseason=>
+          {:win_percentage=>0.59,
+           :total_goals_scored=>48,
+           :total_goals_against=>40,
+           :average_goals_scored=>2.18,
+           :average_goals_against=>1.82},
+         :regular_season=>
+          {:win_percentage=>0.38,
+           :total_goals_scored=>180,
+           :total_goals_against=>170,
+           :average_goals_scored=>2.2,
+           :average_goals_against=>2.07}},
+       "20172018"=>
+        {:postseason=>
+          {:win_percentage=>0.54,
+           :total_goals_scored=>29,
+           :total_goals_against=>28,
+           :average_goals_scored=>2.23,
+           :average_goals_against=>2.15},
+         :regular_season=>
+          {:win_percentage=>0.44,
+           :total_goals_scored=>187,
+           :total_goals_against=>162,
+           :average_goals_scored=>2.28,
+           :average_goals_against=>1.98}},
+       "20132014"=>
+        {:postseason=>
+          {:win_percentage=>0.0,
+           :total_goals_scored=>0,
+           :total_goals_against=>0,
+           :average_goals_scored=>0.0,
+           :average_goals_against=>0.0},
+         :regular_season=>
+          {:win_percentage=>0.38,
+           :total_goals_scored=>166,
+           :total_goals_against=>177,
+           :average_goals_scored=>2.02,
+           :average_goals_against=>2.16}},
+       "20122013"=>
+        {:postseason=>
+          {:win_percentage=>0.0,
+           :total_goals_scored=>0,
+           :total_goals_against=>0,
+           :average_goals_scored=>0.0,
+           :average_goals_against=>0.0},
+         :regular_season=>
+          {:win_percentage=>0.25,
+           :total_goals_scored=>85,
+           :total_goals_against=>103,
+           :average_goals_scored=>1.77,
+           :average_goals_against=>2.15}},
+       "20142015"=>
+        {:postseason=>
+          {:win_percentage=>0.67,
+           :total_goals_scored=>17,
+           :total_goals_against=>13,
+           :average_goals_scored=>2.83,
+           :average_goals_against=>2.17},
+         :regular_season=>
+          {:win_percentage=>0.5,
+           :total_goals_scored=>186,
+           :total_goals_against=>162,
+           :average_goals_scored=>2.27,
+           :average_goals_against=>1.98}},
+       "20152016"=>
+        {:postseason=>
+          {:win_percentage=>0.36,
+           :total_goals_scored=>25,
+           :total_goals_against=>33,
+           :average_goals_scored=>1.79,
+           :average_goals_against=>2.36},
+         :regular_season=>
+          {:win_percentage=>0.45,
+           :total_goals_scored=>178,
+           :total_goals_against=>159,
+           :average_goals_scored=>2.17,
+           :average_goals_against=>1.94}}}
+
       expect(@stat_tracker.seasonal_summary("18")).to eq expected
     end
 
-    xit "#biggest_bust" do
-      expect(@stat_tracker.biggest_bust("20132014")).to eq "Lightning"
-      expect(@stat_tracker.biggest_bust("20142015")).to eq "Jets"
+    it "#biggest_bust" do
+      expect(@stat_tracker.biggest_bust("20132014")).to eq "Montreal Impact"
+      expect(@stat_tracker.biggest_bust("20142015")).to eq "Sporting Kansas City"
     end
 
-    xit "#biggest_surprise" do
-      expect(@stat_tracker.biggest_surprise("20132014")).to eq "Kings"
-      expect(@stat_tracker.biggest_surprise("20142015")).to eq "Blackhawks"
+    it "#biggest_surprise" do
+      expect(@stat_tracker.biggest_surprise("20132014")).to eq "FC Cincinnati"
+      expect(@stat_tracker.biggest_surprise("20142015")).to eq "Minnesota United FC"
     end
 
-    xit "#winningest_coach" do
+    it "#winningest_coach" do
       expect(@stat_tracker.winningest_coach("20132014")).to eq "Claude Julien"
       expect(@stat_tracker.winningest_coach("20142015")).to eq "Alain Vigneault"
     end
 
-    xit "#worst_coach" do
+    it "#worst_coach" do
       expect(@stat_tracker.worst_coach("20132014")).to eq "Peter Laviolette"
       expect(@stat_tracker.worst_coach("20142015")).to eq "Craig MacTavish"
     end
 
-    xit "#most_accurate_team" do
-      expect(@stat_tracker.most_accurate_team("20132014")).to eq "Ducks"
-      expect(@stat_tracker.most_accurate_team("20142015")).to eq "Flames"
+    it "#most_accurate_team" do
+      expect(@stat_tracker.most_accurate_team("20132014")).to eq "Real Salt Lake"
+      expect(@stat_tracker.most_accurate_team("20142015")).to eq "Toronto FC"
     end
 
-    xit "#least_accurate_team" do
-      expect(@stat_tracker.least_accurate_team("20132014")).to eq "Sabres"
-      expect(@stat_tracker.least_accurate_team("20142015")).to eq "Coyotes"
+    it "#least_accurate_team" do
+      expect(@stat_tracker.least_accurate_team("20132014")).to eq "New York City FC"
+      expect(@stat_tracker.least_accurate_team("20142015")).to eq "Columbus Crew SC"
     end
 
-    xit "#most_hits" do
-      expect(@stat_tracker.most_hits("20132014")).to eq "Kings"
-      expect(@stat_tracker.most_hits("20142015")).to eq "Islanders"
+    it "#most_tackles" do
+      expect(@stat_tracker.most_tackles("20132014")).to eq "FC Cincinnati"
+      expect(@stat_tracker.most_tackles("20142015")).to eq "Seattle Sounders FC"
     end
 
-    xit "#fewest_hits" do
-      expect(@stat_tracker.fewest_hits("20132014")).to eq "Devils"
-      expect(@stat_tracker.fewest_hits("20142015")).to eq "Wild"
-    end
-
-    xit "#power_play_goal_percentage" do
-      expect(@stat_tracker.power_play_goal_percentage("20132014")).to eq 0.22
-      expect(@stat_tracker.power_play_goal_percentage("20142015")).to eq 0.21
+    it "#fewest_tackles" do
+      expect(@stat_tracker.fewest_tackles("20132014")).to eq "Atlanta United"
+      expect(@stat_tracker.fewest_tackles("20142015")).to eq "Orlando City SC"
     end
 end
