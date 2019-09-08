@@ -116,7 +116,7 @@ RSpec.describe StatTracker do
   end
 
   it "#worst_fans" do
-    expect(@stat_tracker.worst_fans).to eq ["Houston Dynamo"]
+    expect(@stat_tracker.worst_fans).to eq ["Houston Dynamo", "Utah Royals FC"]
   end
 
   it "#team_info" do
