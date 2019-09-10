@@ -168,7 +168,7 @@ RSpec.describe StatTracker do
   end
 
   it "#head_to_head" do
-    expected = {
+    expected_1 = {
      "Atlanta United"=>0.5,
      "Chicago Fire"=>0.3,
      "FC Cincinnati"=>0.39,
