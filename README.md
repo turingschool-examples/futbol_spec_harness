@@ -2,7 +2,7 @@
 
 ## Setup
 
-First, make sure that you have a directory called `futbol` that contains all the code for you project. For example, inside the `futbol` directory should be `lib`, `test`, and `data` directories. The spelling must be exactly `futbol`.
+First, make sure that you have a directory called `futbol` that contains all the code for you project. For example, inside the `futbol` directory should be `lib`, `spec`, and `data` directories. The spelling must be exactly `futbol`.
 
 Navigate to the directory where `futbol` is located and clone this repository. Make sure you not *inside* the `futbol` directory, but rather adjacent to it, i.e. if you enter `ls` you should see `futbol` listed.
 
@@ -36,4 +36,4 @@ You should change it to use a `require_relative`:
 require_relative './helper_class'
 ```
 
-You do not need to change any of the require statements inside your `test` directory.
+You do not need to change any of the require statements inside your `spec` directory.
